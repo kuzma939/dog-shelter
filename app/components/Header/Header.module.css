@@ -1,0 +1,26 @@
+.div {
+  margin-top: 51px;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  gap: 24.8px;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border-radius: 40px;
+  width: 162px;
+  height: 47px;
+  background-color: #99621e;
+  cursor: pointer;
+}
+
+.svg {
+  cursor: pointer;
+  width: 42px;
+  height: 28px;
+  color: #99621e;
+}

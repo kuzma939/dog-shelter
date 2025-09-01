@@ -1,0 +1,54 @@
+.wrapper {
+  padding-top: 100px;
+  background: url("../../../public/how_to_help.png");
+  background-size: cover;
+}
+
+.h2 {
+  font-weight: 700;
+  font-size: 63px;
+  line-height: 88%;
+  text-transform: capitalize;
+  color: #fff;
+  text-align: left;
+  padding-bottom: 56px;
+}
+
+.p1,
+.p2 {
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 160%;
+  text-transform: capitalize;
+  color: #fff;
+}
+
+.p1 {
+  width: 926px;
+}
+
+.p2 {
+  width: 700px;
+  padding-bottom: 26px;
+}
+
+.paw {
+  margin-left: 400px;
+  width: 34px;
+  height: 32px;
+  margin-block: 35px;
+}
+
+.button {
+  border-radius: 40px;
+  padding: 18px 27px;
+  width: 515px;
+  height: 93px;
+  background: #99621e;
+  font-weight: 700;
+  font-size: 31px;
+  line-height: 175%;
+  color: #fff7ef;
+  margin-left: 240px;
+  margin-bottom: 150px;
+}
