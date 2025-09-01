@@ -1,7 +1,11 @@
 .wrapper {
   padding-top: 100px;
-  background: url("../../../public/how_to_help.png");
-  background-size: cover;
+  min-height: 100vh; /* займає всю висоту екрану */
+  width: 100%; /* займає всю ширину */
+  padding-top: 100px;
+
+  background: url("/how_to_help.png") no-repeat center center;
+  background-size: auto;
 }
 
 .h2 {
