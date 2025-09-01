@@ -1,0 +1,17 @@
+.footer {
+  background-color: #99621e;
+  color: white;
+  padding-top: 24px;
+  padding-bottom: 36px;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.paw {
+  width: 42px;
+  height: 40px;
+}
