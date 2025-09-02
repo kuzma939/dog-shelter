@@ -1,0 +1,31 @@
+import "./globals.css";
+import Header from "../components/Header/Header.jsx";
+import Footer from "../components/Footer/Footer.jsx";
+import { Providers } from "../redux/Providers.jsx";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+});
+
+export const metadata = { title: "App", description: "…" };
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <Providers>
+          <Header />
+          {children}
+          <Footer />
+        </Providers>
+      </body>
+    </html>
+  );
+}

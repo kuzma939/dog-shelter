@@ -1,0 +1,6 @@
+.wrapper {
+  padding-top: 140px;
+  display: flex;
+  align-items: center;
+  gap: 190px;
+}
