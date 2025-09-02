@@ -1,0 +1,91 @@
+.hero {
+  --brand: #99621e;
+  --brand-600: #845518;
+  height: 845px;              
+  color: #fff;
+  overflow: hidden;
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  background:
+      linear-gradient(
+         90deg,
+      rgba(0,0,0,0) 46%,
+      rgba(0,0,0,0.65) 66%,
+      rgba(0,0,0,0.88) 82%,
+      rgba(0,0,0,0.96) 92%,
+      rgba(0,0,0,1) 100%
+      
+    ),
+    url("/image/hiro.avif") center/cover no-repeat; 
+  z-index: -1;
+}
+
+.inner {
+
+  height: 100%;
+}
+.button {
+  position: absolute;
+  left: 80px;
+  top: 606px;
+
+  width: 318px;
+  height: 93px;
+
+  display: flex;
+  align-items: center;        
+  justify-content: center;   
+
+  padding: 0 28px;         
+  gap: 0;                    
+  background: #99621E;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 40px;
+  box-shadow: 0 12px 28px rgba(0,0,0,.25);
+  cursor: pointer;
+  transition: background-color .15s ease, transform .15s ease;
+}
+.cta:hover { background: var(--brand-600); transform: translateY(-2px); }
+
+
+.cta > span {
+  white-space: nowrap;
+  text-align: center;
+  font-family: "Montserrat Alternates","Montserrat",Arial,Helvetica,sans-serif;
+  font-weight: 700;         
+  font-size: 31.74px;         
+  line-height: 1;             
+  letter-spacing: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translateY(-1px); 
+}
+
+.info {
+  position: absolute;
+  right: 100px;
+  top: 328px;                 
+  text-align: right;
+  text-shadow: 0 2px 10px rgba(0,0,0,.45);
+  font-family: "Montserrat Alternates","Montserrat",Arial,Helvetica,sans-serif;
+}
+
+
+.info .line:nth-child(3) {
+  text-decoration: underline;
+  text-underline-offset: 6px;     
+  text-decoration-thickness: 2px; 
+  text-decoration-color: rgba(255,255,255,.95);
+}
+
+
+.line {
+  margin: 0;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 55px;
+}
