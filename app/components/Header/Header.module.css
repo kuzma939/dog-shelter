@@ -1,4 +1,13 @@
+.overlay{
+  position: fixed;   
+  top: 24px;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: transparent;
+}
 .div {
+ 
   margin-top: 51px;
   display: flex;
   justify-content: right;
