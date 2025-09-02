@@ -2,14 +2,20 @@ import "./globals.css";
 import Header from "../components/Header/Header.jsx";
 import Footer from "../components/Footer/Footer.jsx";
 import { Providers } from "../redux/Providers.jsx";
+import { Montserrat, Montserrat_Alternates } from "next/font/google";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const montserrat = Montserrat({
+  variable: "--font-sans",              
+  subsets: ["latin", "cyrillic"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  subsets: ["latin"],
+const montAlt = Montserrat_Alternates({
+  variable: "--font-alt",               
+  subsets: ["latin", "cyrillic"],
+  weight: ["600", "700"],
+  display: "swap",
 });
 
 export const metadata = { title: "App", description: "…" };
@@ -18,7 +24,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      className={`${montserrat.variable} ${montAlt.variable} antialiased`}
+       
       >
         <Providers>
           <Header />
