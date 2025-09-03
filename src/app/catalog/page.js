@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image";
-import { fetchDogs } from "@/src/redux/dogs/slice.js";
+import { fetchDogs } from "../../redux/dogs/slice.js";
 
 export default function DogsList() {
   const dispatch = useDispatch();
