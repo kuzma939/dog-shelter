@@ -1,40 +1,28 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import css from "./AnimalsBar.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { selectFilters, selectFilteredCount, setFilters } from "../../redux/dogs/slice";
 import { FiSearch } from "react-icons/fi";
+import css from "./AnimalsBar.module.css";
 
+export default function AnimalsBar() {
+  const dispatch = useDispatch();
+  const { q, who } = useSelector(selectFilters);
+  const count = useSelector(selectFilteredCount);
 
-export default function AnimalsBar({ items = [] }) {
-  const [q, setQ] = useState("");
-  const [who, setWho] = useState("all");
-
-  const filtered = useMemo(() => {
-    const needle = q.trim().toLowerCase();
-    return items.filter((it) => {
-      const byType = who === "all" || it.type === who;
-      if (!byType) return false;
-      if (!needle) return true;
-
-      const hay = [it.name, it.breed, it.age]
-        .filter(Boolean)
-        .join(" ")
-        .toLowerCase();
-
-      return hay.includes(needle);
-    });
-  }, [items, q, who]);
+  const onQueryChange = (e) => dispatch(setFilters({ q: e.target.value }));
+  const onWhoChange   = (e) => dispatch(setFilters({ who: e.target.value }));
 
   return (
     <section className={`container ${css.wrap}`}>
-      <div className={css.count}>{filtered.length}</div>
+      <div className={css.count}>{count}</div>
 
       <p className={css.subtitle}>
         улюбленців чекають на новий дім — стань родиною для одного з них
       </p>
 
       <div className={css.controls}>
-        {/* Пошук */}
+  
         <label className={css.search}>
           <FiSearch className={css.searchIcon} />
           <input
@@ -42,17 +30,16 @@ export default function AnimalsBar({ items = [] }) {
             type="text"
             placeholder="Пошук"
             value={q}
-            onChange={(e) => setQ(e.target.value)}
+            onChange={onQueryChange}
           />
         </label>
 
-        {/* Фільтр “Кого шукаємо ?” */}
         <div className={css.filter}>
           <span className={css.filterLabel}>Кого шукаємо ?</span>
           <select
             className={css.select}
             value={who}
-            onChange={(e) => setWho(e.target.value)}
+            onChange={onWhoChange}
             aria-label="Кого шукаємо"
           >
             <option value="all">Усі</option>
