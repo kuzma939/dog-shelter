@@ -11,8 +11,8 @@ export default function Home() {
         < AnimalsBar />
        < Gallery />
         <HowToHelp />
+    <Address />
       </main>
  
-    
   );
 }

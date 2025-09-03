@@ -1,0 +1,108 @@
+.div {
+  background: #909090;
+  padding-bottom: 60px;
+  position: relative;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+}
+
+.heading {
+  font-family: "Montserrat Alternates", sans-serif;
+  text-align: center;
+  font-weight: 700;
+  font-size: 64px;
+  padding-top: 30px;
+  line-height: 87%;
+  text-transform: capitalize;
+  color: #100800;
+}
+
+.h3 {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 175%;
+  padding-left: 190px;
+  padding-bottom: 70px;
+  padding-top: 70px;
+  text-transform: capitalize;
+  color: #100800;
+}
+
+.h4 {
+  font-weight: 500;
+  font-size: 30px;
+  padding-left: 137px;
+}
+
+.p {
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 150%;
+  padding-left: 140px;
+  padding-right: 102px;
+}
+
+.li {
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 167%;
+  padding-right: 50px;
+}
+
+.ol {
+  list-style: decimal;
+  padding-left: 165px;
+}
+
+.check {
+  color: #37b34a;
+  top: 60px;
+  left: 120px;
+  width: 60px;
+  height: 60px;
+  position: absolute;
+}
+
+.paw {
+  width: 140px;
+  height: 140px;
+  color: #99621e;
+  position: absolute;
+  transform: rotate(45deg);
+  top: 0;
+  right: 0;
+}
+
+.pawDiv {
+  position: relative;
+}
+
+.bigPaw {
+  position: absolute;
+  width: 564px;
+  transform: rotate(45deg);
+  height: 560px;
+  color: rgba(153, 98, 30, 0.2);
+  top: 120px;
+}
+
+.pawP {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 140%;
+  color: #100800;
+  position: absolute;
+  bottom: 120px;
+  left: 475px;
+  width: 320px;
+}
+
+.img {
+  margin-left: auto;
+}
