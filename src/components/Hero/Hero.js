@@ -1,15 +1,17 @@
+"use client";
 import React from "react";
 import css from "./Hero.module.css";
-
+import Link from "next/link";
 export default function Hero() {
   return (
     <section className={css.hero}>
       <div className={css.bg} />
       <div className="container">
         <div className={css.inner}>
-          <a href="#adopt" className={css.button}>
+          <Link href="/gallery" className={css.button} aria-label="Перейти до галереї">
             <span>Знайти Друга</span>
-          </a>
+          </Link>
+         
 
           <div className={css.info}>
             <p className={css.line}>Понеділок — Неділя</p>

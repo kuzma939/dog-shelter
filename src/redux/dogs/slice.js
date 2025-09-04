@@ -1,4 +1,3 @@
-
 import {
   createSlice,
   createAsyncThunk,
@@ -6,21 +5,20 @@ import {
 } from "@reduxjs/toolkit";
 import axios from "axios";
 
-/* =========================
-   API
-   ========================= */
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL ||
   "https://dog-shelter-api-66zi.onrender.com/dogs";
 
-/* =========================
-   Thunks
-   ========================= */
-export const fetchDogs = createAsyncThunk(
+
+   export const fetchDogs = createAsyncThunk(
   "dogs/fetchAll",
-  async (_, thunkAPI) => {
+  async ({ page = 1, limit = 1000 } = {}, thunkAPI) => {
     try {
-      const res = await axios.get(API_URL, { signal: thunkAPI.signal });
+      const res = await axios.get(API_URL, {
+        signal: thunkAPI.signal,
+        params: { page, limit }, 
+      });
+      
       return res.data?.data ?? res.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e?.response?.data?.message || e.message);
@@ -60,25 +58,43 @@ const normType = (d) =>
 
 const normGender = (d) => {
   const raw = String(d.gender ?? d.sex ?? "").toLowerCase();
-  if (raw.startsWith("f") || raw.startsWith("ж")) return "female";
-  if (raw.startsWith("m") || raw.startsWith("ч")) return "male";
+  if (/^(f|ж|female|самка)/.test(raw)) return "female";
+  if (/^(m|ч|male|самець)/.test(raw)) return "male";
   return "unknown";
 };
 
 const ageNum = (d) => {
-  if (typeof d.age === "number") return d.age;
-  if (typeof d.age === "object" && d.age) {
-    const v = Number(d.age.value ?? d.age.val ?? 0);
-    const unit = String(d.age.unit ?? "").toLowerCase();
-    if (unit.includes("міс") || unit.includes("month")) return +(v / 12).toFixed(2);
-    return v; // роки
+  const a = d.age ?? d.ageValue;
+  if (typeof a === "number") return a;
+
+  if (a && typeof a === "object") {
+    const v = Number(a.value ?? a.val ?? a.v ?? NaN);
+    const unit = String(a.unit ?? "").toLowerCase();
+    if (Number.isFinite(v)) {
+      if (/(міс|month)/.test(unit)) return +(v / 12).toFixed(2);
+      return v; 
+    }
   }
-  return Number(d.ageValue ?? 0);
+
+  if (typeof a === "string") {
+    const num = parseFloat(a.replace(",", "."));
+    if (Number.isFinite(num)) {
+      if (/(міс|місяц|month)/i.test(a)) return +(num / 12).toFixed(2);
+      return num;
+    }
+  }
+
+  return NaN;
 };
 
 const weightNum = (d) => {
-  const w = d.weight ?? d.weightKg ?? d.mass;
-  return w == null ? NaN : Number(w);
+  const w = d.weight ?? d.weightKg ?? d.mass ?? d.weight_kg;
+  if (typeof w === "number") return w;
+  if (typeof w === "string") {
+    const num = parseFloat(w.replace(",", "."));
+    return Number.isFinite(num) ? num : NaN;
+  }
+  return NaN;
 };
 
 const haystack = (d) =>
@@ -86,27 +102,38 @@ const haystack = (d) =>
     d.name,
     d.breed,
     d.desc || d.description,
-    String(ageNum(d)), 
+    String(ageNum(d)),
   ]
     .filter(Boolean)
     .join(" ")
     .toLowerCase();
 
+const inRange = (val, min, max) => {
+  if (!Number.isFinite(val)) return true;
+  if (min != null && val < min) return false;
+  if (max != null && val > max) return false;
+  return true;
+};
+
+/* =========================
+   Filters
+   ========================= */
+
 const DEFAULT_FILTERS = {
-  q: "",          // текстовий пошук (ім’я, порода, опис, вік)
-  who: "all",     // dog | cat | all
-  gender: "all",  // male | female | all
-  ageMin: 0,
-  ageMax: 10,     // під макет
-  weightMin: 1,
-  weightMax: 40,  // під слайдер
+  q: "",
+  who: "all",    
+  gender: "all",  
+  ageMin: null,
+  ageMax: null,
+  weightMin: null,
+  weightMax: null,
 };
 
 const initialState = {
   items: [],
   loading: false,
   error: null,
-  filters: { ...DEFAULT_FILTERS }, 
+  filters: { ...DEFAULT_FILTERS },
 };
 
 /* =========================
@@ -120,8 +147,7 @@ const dogsSlice = createSlice({
       state.filters = { ...state.filters, ...action.payload };
     },
     resetFilters: (state) => {
-      // важливо повертати копію, а не посилання
-      state.filters = { ...DEFAULT_FILTERS };
+      state.filters = { ...DEFAULT_FILTERS }; 
     },
   },
   extraReducers: (builder) => {
@@ -156,23 +182,22 @@ export default dogsSlice.reducer;
    Selectors
    ========================= */
 export const selectDogsState = (s) => s.dogs;
-export const selectDogs      = (s) => s.dogs.items;
-export const selectFilters   = (s) => s.dogs.filters;
-export const selectLoading   = (s) => s.dogs.loading;
-export const selectError     = (s) => s.dogs.error;
+export const selectDogs = (s) => s.dogs.items;
+export const selectFilters = (s) => s.dogs.filters;
+export const selectLoading = (s) => s.dogs.loading;
+export const selectError = (s) => s.dogs.error;
 
 export const selectFilteredDogs = createSelector(
   [selectDogs, selectFilters],
   (items, f) => {
-    // дефолти — щоб усе працювало навіть якщо фільтри десь зламають
     const {
       q = "",
       who = "all",
       gender = "all",
-      ageMin = 0,
-      ageMax = 10,
-      weightMin = 1,
-      weightMax = 40,
+      ageMin = null,
+      ageMax = null,
+      weightMin = null,
+      weightMax = null,
     } = f || {};
 
     const needle = q.trim().toLowerCase();
@@ -183,11 +208,8 @@ export const selectFilteredDogs = createSelector(
       const g = normGender(d);
       if (!(gender === "all" || g === gender)) return false;
 
-      const a = ageNum(d);
-      if (Number.isFinite(a) && (a < ageMin || a > ageMax)) return false;
-
-      const w = weightNum(d);
-      if (Number.isFinite(w) && (w < weightMin || w > weightMax)) return false;
+      if (!inRange(ageNum(d), ageMin, ageMax)) return false;
+      if (!inRange(weightNum(d), weightMin, weightMax)) return false;
 
       return !needle || haystack(d).includes(needle);
     });

@@ -9,17 +9,75 @@
   z-index: 1000;
 }
 
-
 .sheet{
-  width: min(595px, calc(100vw - 32px));
+  width: min(640px, calc(100vw - 32px));   
   background: var(--bg);
   border-radius: 40px;
   padding: 28px 32px 24px;
   box-shadow: 0 24px 64px rgba(0,0,0,.25);
   position: relative;
   color: var(--text);
+
 }
 
+
+.sliderBox{
+  width: 100%;
+  max-width: 420px;                        
+  padding: 6px 0 10px;
+}
+
+.slider{
+  height: 32px;                          
+  position: relative;
+}
+
+
+.slider :global(.rc-slider-rail){
+  height: 8px;
+  background: var(--rail);
+  border-radius: 999px;
+  border: .5px solid #100800;             
+}
+
+
+.slider :global(.rc-slider-track){
+  height: 8px;
+  background: var(--accent);
+  border-radius: 999px;
+}
+
+
+.slider :global(.rc-slider-handle){
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 0 3px rgba(153,98,30,.12);
+  margin-top: -10px;                     
+  cursor: grab;
+}
+
+
+.slider :global(.rc-slider-handle:focus-visible),
+.slider :global(.rc-slider-handle-dragging){
+  box-shadow: 0 0 0 6px rgba(153,98,30,.18);
+  outline: none;
+  cursor: grabbing;
+}
+
+
+.slider :global(.rc-slider-step){ display: none; }
+
+
+.scale{
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+}
 
 .close{
   position: absolute;
@@ -72,7 +130,7 @@
 }
 .radio span{ font-weight: 500; }
 
-/* слайдери (2 інпути встановлюють min/max) */
+
 .rangeBox{ position: relative; padding: 4px 0 8px; }
 .range{
   -webkit-appearance: none;
@@ -84,7 +142,6 @@
   outline: none;
 }
 
-/* thumb webkit */
 .range::-webkit-slider-thumb{
   -webkit-appearance: none;
   width: 18px; height: 18px;
@@ -99,7 +156,6 @@
   height: 4px; background: var(--accent); border-radius: 999px;
 }
 
-/* firefox */
 .range::-moz-range-thumb{
   width: 18px; height: 18px; border-radius: 50%;
   background: #fff; border: 2px solid var(--accent);
@@ -107,16 +163,7 @@
 }
 .range::-moz-range-track{ height: 4px; background: var(--rail); border-radius: 999px; }
 
-/* цифри під доріжкою */
-.scale{
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 6px;
-}
 
-/* кнопки внизу */
 .actions{ display: flex; align-items: center; gap: 14px; margin-top: 22px; }
 .apply{
   background: var(--accent);
