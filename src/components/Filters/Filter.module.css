@@ -1,0 +1,142 @@
+
+.backdrop{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  z-index: 1000;
+}
+
+
+.sheet{
+  width: min(595px, calc(100vw - 32px));
+  background: var(--bg);
+  border-radius: 40px;
+  padding: 28px 32px 24px;
+  box-shadow: 0 24px 64px rgba(0,0,0,.25);
+  position: relative;
+  color: var(--text);
+}
+
+
+.close{
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,.08);
+  background: #fff;
+  display: grid;
+  place-items: center;
+  color: #666;
+  cursor: pointer;
+  transition: .18s ease;
+}
+.close:hover{ color: var(--accent); border-color: var(--accent); box-shadow: 0 4px 14px rgba(153,98,30,.18); }
+
+.title{
+  font-weight: 700;
+  font-size: 18px;
+  margin: 6px 0 16px;
+  
+}
+
+.row{ margin-top: 18px; text-align: left;
+}
+.label{
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+
+.radios{ display: flex; gap: 10px; flex-wrap: wrap; }
+.radio{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 14px;
+  
+  cursor: pointer;
+  user-select: none;
+}
+.radio input{ appearance: none; width: 14px; height: 14px; border: 2px solid ; border-radius: 50%; margin: 0; }
+.radio input:checked{
+  border-color: var(--accent);
+  background: radial-gradient(var(--accent) 55%, transparent 56%);
+}
+.radio span{ font-weight: 500; }
+
+/* слайдери (2 інпути встановлюють min/max) */
+.rangeBox{ position: relative; padding: 4px 0 8px; }
+.range{
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: var(--rail);
+  border-radius: 999px;
+  outline: none;
+}
+
+/* thumb webkit */
+.range::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--accent);
+  margin-top: -7px;           
+  box-shadow: 0 0 0 2px rgba(153,98,30,.15);
+}
+
+.range::-webkit-slider-runnable-track{
+  height: 4px; background: var(--accent); border-radius: 999px;
+}
+
+/* firefox */
+.range::-moz-range-thumb{
+  width: 18px; height: 18px; border-radius: 50%;
+  background: #fff; border: 2px solid var(--accent);
+  box-shadow: 0 0 0 2px rgba(153,98,30,.15);
+}
+.range::-moz-range-track{ height: 4px; background: var(--rail); border-radius: 999px; }
+
+/* цифри під доріжкою */
+.scale{
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+/* кнопки внизу */
+.actions{ display: flex; align-items: center; gap: 14px; margin-top: 22px; }
+.apply{
+  background: var(--accent);
+  color: #fff;
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .15s ease;
+}
+.apply:hover{ filter: brightness(.96); }
+.reset{
+  background: none;
+  border: 0;
+  color: var(--muted);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@media (max-width: 600px){
+  .sheet{ width: 100%; border-radius: 24px; padding: 22px 18px; }
+}

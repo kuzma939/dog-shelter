@@ -67,18 +67,32 @@
   outline: none;
   font-size: 18px;
 }
-
 .filter {
   display: flex;
   align-items: center;
-  gap: 12px;
   justify-content: flex-start;
 }
 
-.filterLabel {
-  font-weight: 600;
-  font-size: 18px;
-  white-space: nowrap;
+.filterBtn {
+  display: inline-flex;           /* ← тримає текст і стрілку в один ряд */
+  align-items: center;
+  gap: 8px;                       /* відступ між текстом і стрілкою */
+  height: 56px;
+  padding: 0 14px;
+  border-radius: 12px;
+ 
+  font-size: 16px;
+  line-height: 1;                 /* щоб іконка не “падала” */
+  white-space: nowrap;            /* не переносити текст */
+  cursor: pointer;
+}
+
+.chev {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  /* іноді корисно трішки опустити/підняти, якщо здається візуально криво: */
+  /* transform: translateY(1px); */
 }
 
 .select {
