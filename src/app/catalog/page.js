@@ -2,11 +2,12 @@
 
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { fetchDogs } from "../../redux/dogs/slice.js";
 
 export default function DogsList() {
   const dispatch = useDispatch();
+  const router = useRouter();
   const { items, loading, error } = useSelector((state) => state.dogs);
 
   useEffect(() => {
@@ -19,7 +20,13 @@ export default function DogsList() {
   return (
     <div>
       {items.map((dog) => (
-        <div key={dog._id}>{dog.name}</div>
+        <div
+          key={dog._id}
+          className="cursor-pointer hover:text-blue-600"
+          onClick={() => router.push(`/catalog/${dog._id}`)}
+        >
+          {dog.name}
+        </div>
       ))}
     </div>
   );

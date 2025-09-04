@@ -1,12 +1,30 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-      images: {
+  images: {
     remotePatterns: [
-      { protocol: 'https', hostname: 'dog-shelter-api-66zi.onrender.com', pathname: '/**' },
-      { protocol: 'http',  hostname: 'localhost', port: '3001', pathname: '/**' }, // локальний бек
-      { protocol: 'https', hostname: 'images.pexels.com', pathname: '/**' },      // <- додали Pexels
+      {
+        protocol: "https",
+        hostname: "dog-shelter-api-66zi.onrender.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "3001",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.pexels.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        pathname: "/**",
+      },
     ],
   },
-
 };
+
 export default nextConfig;
