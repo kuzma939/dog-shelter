@@ -61,3 +61,6 @@
 @media (max-width: 640px) {
   .grid { grid-template-columns: 1fr; }
 }
+.anchor { display: block; height: 1px; }
+
+#events { scroll-margin-top: 72px; } 

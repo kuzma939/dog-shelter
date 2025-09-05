@@ -3,6 +3,7 @@
   color: white;
   padding-top: 24px;
   padding-bottom: 36px;
+ 
 }
 
 .wrapper {
@@ -16,3 +17,9 @@
   height: 40px;
   margin-right: 140px;
 }
+
+/* невидимий елемент-ціль наприкінці футера */
+.anchor { display:block; height:1px; }
+
+/* якщо є фіксований хедер — щоб якір не ховався під ним */
+#contacts { scroll-margin-top: 24px; } /* підстав висоту свого хедера */

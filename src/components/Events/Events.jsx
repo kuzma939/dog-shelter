@@ -28,7 +28,7 @@ export default function Events({ limit = 3 }) {
       <div className={css.grid}>
         {list.map((e) => <Card key={e.id} e={e} />)}
       </div>
-
+<span id="events" className={css.anchor} aria-hidden="true" />
       {err && <p className={css.error}>{err}</p>}
     </section>
   );

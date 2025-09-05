@@ -30,7 +30,10 @@ export default function Footer() {
 
             <a href="mailto:pet.center@gmail.com">pet.center@gmail.com</a>
           </div>
+             
+   
         </div>
+        <span id="contacts" className={css.anchor} aria-hidden="true" />
       </div>
     </footer>
   );

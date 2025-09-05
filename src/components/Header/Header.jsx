@@ -4,12 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { RxCross2 } from "react-icons/rx";         
 import css from "./Header.module.css";
 
 export default function Header({ overlay = false }) {
   const pathname = usePathname();
   const isHome = pathname === "/";
-
   const [open, setOpen] = useState(false);
   const wrapRef = useRef(null);
 
@@ -28,45 +28,46 @@ export default function Header({ overlay = false }) {
     };
   }, [open]);
 
+  const anchor = (id) => (isHome ? `#${id}` : `/#${id}`);
+
   return (
     <header className={overlay ? css.overlay : ""}>
       <div className={`container ${css.div}`}>
         {isHome ? (
           <>
-            {/* ті самі 3 кнопки праворуч */}
-            <Link href="/gallery"  className={css.button} role="button">Галерея</Link>
-            <Link href="/#reviews" className={css.button} role="button">Відгуки</Link>
-            <Link href="/#about"   className={css.button} role="button">Про нас</Link>
-
-            <button type="button" className={css.iconBtn} aria-label="Меню">
-              <GiHamburgerMenu className={css.svg} />
-            </button>
+            <Link href="/gallery" className={css.button} role="button">Галерея</Link>
+            <Link href={anchor("reviews")} className={css.button} role="button">Відгуки</Link>
+            <Link href={anchor("about")}   className={css.button} role="button">Про нас</Link>
           </>
         ) : (
-          <>
-            {/* на інших сторінках — теж праворуч */}
-            <Link href="/" className={css.button}>На Головну</Link>
-
-            <div className={css.menuWrap} ref={wrapRef}>
-              <button
-                type="button"
-                className={css.iconBtn}
-                aria-label="Відкрити меню"
-                aria-expanded={open}
-                aria-controls="header-menu"
-                onClick={() => setOpen((v) => !v)}
-              >
-                <GiHamburgerMenu className={css.svg} />
-              </button>
-
-              <div id="header-menu" className={`${css.menu} ${open ? css.open : ""}`} role="menu">
-                <Link href="/gallery"  onClick={() => setOpen(false)}>Галерея</Link>
-                <Link href="/#reviews" onClick={() => setOpen(false)}>Відгуки</Link>
-                <Link href="/#about"   onClick={() => setOpen(false)}>Про нас</Link>
-              </div>
-            </div>
-          </>
+          <Link href="/" className={css.button}>На Головну</Link>
         )}
+        <div className={css.menuWrap} ref={wrapRef}>
+          <button
+            type="button"
+            className={css.iconBtn}
+            aria-label={open ? "Закрити меню" : "Відкрити меню"}
+            aria-expanded={open}
+            aria-controls="header-menu"
+            onClick={() => setOpen(v => !v)}
+          >
+            {open ? <RxCross2 className={css.svg}/> : <GiHamburgerMenu className={css.svg}/>}
+          </button>
+<nav
+  id="header-menu"
+  className={`${css.menu} ${open ? css.open : ""}`}
+  role="menu"
+>
+  <Link href="/gallery"     role="menuitem" onClick={() => setOpen(false)}>Галерея</Link>
+  <Link href="/faq"         role="menuitem" onClick={() => setOpen(false)}>Часті Питання</Link>
+ <Link href="/#events" onClick={() => setOpen(false)}>Останні події</Link>
+
+  <Link href="/how-to-help" role="menuitem" onClick={() => setOpen(false)}>Волонтерство</Link>
+  <Link href={anchor("contacts")}   role="menuitem" onClick={() => setOpen(false)}>Контакти</Link>
+  <Link href={anchor("about")}      role="menuitem" onClick={() => setOpen(false)}>Про нас</Link>
+</nav>
+
+        </div>
       </div>
     </header>
   );
