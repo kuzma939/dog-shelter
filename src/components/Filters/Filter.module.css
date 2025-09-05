@@ -10,10 +10,10 @@
 }
 
 .sheet{
-  width: min(640px, calc(100vw - 32px));   
+  width: min(500px, calc(100vw - 32px));   
   background: var(--bg);
   border-radius: 40px;
-  padding: 28px 32px 24px;
+  padding: 28px 24px 24px;
   box-shadow: 0 24px 64px rgba(0,0,0,.25);
   position: relative;
   color: var(--text);
@@ -103,7 +103,7 @@
   
 }
 
-.row{ margin-top: 18px; text-align: left;
+.row{ margin-top: 18px; text-align: left; 
 }
 .label{
   font-weight: 700;

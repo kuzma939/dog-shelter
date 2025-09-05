@@ -1,0 +1,35 @@
+
+.bleed{
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  margin-bottom: 60px;
+  margin-top: 60px;
+}
+
+.inner{
+  max-width: 1428px;         
+  margin: 0 auto;
+  padding-inline: 0;          
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;                
+}
+
+
+.figure{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 748 / 506;
+ 
+  overflow: hidden;
+}
+.figure :global(img){ object-fit: cover; }
+
+
+@media (max-width: 900px){
+  .inner{ grid-template-columns: 1fr; }
+}

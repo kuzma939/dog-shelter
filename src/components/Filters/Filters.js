@@ -115,7 +115,7 @@ export default function Filter({ open, onClose }) {
   min={0}
   max={60}
   value={weightMax}
-  onChange={(v) => dispatch(setFilters({ weightMax: v }))} // лише max
+  onChange={(v) => dispatch(setFilters({ weightMax: v }))} 
   className={css.slider}
 />
 <div className={css.scale}><span>0</span><span>60</span></div>

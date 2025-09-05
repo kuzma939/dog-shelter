@@ -2,6 +2,8 @@
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
+import { FaPaw } from "react-icons/fa";   
 import {
   fetchDogs,
   selectFilteredDogs,
@@ -16,7 +18,7 @@ const API_HOST =
   "https://dog-shelter-api-66zi.onrender.com";
 
 const toAbsUrl = (src) => {
-  if (!src) return "/image/placeholder.jpg";
+  if (!src) return "/image/mailo.jpg";
   try {
     return new URL(src, API_HOST).href;
   } catch {
@@ -41,7 +43,7 @@ export default function Gallery({ pageSize = 6 }) {
     () =>
       filtered.map((d) => {
         const img =
-          d.image?.url || d.imageUrl || d.photoUrl || d.image || d.img;
+          d.image?.url || d.imageUrl || d.photoUrl1 || d.image || d.img;
         const age =
           typeof d.age === "object"
             ? d.age
@@ -78,6 +80,13 @@ export default function Gallery({ pageSize = 6 }) {
 
   return (
     <section ref={rootRef} className={`container ${css.wraps}`} id="adopt">
+       <div className={css.pawsWrap} aria-hidden="true">
+        <FaPaw className={`${css.paw} ${css.paw1}`} />
+        <FaPaw className={`${css.paw} ${css.paw2}`} />
+        <FaPaw className={`${css.paw} ${css.paw3}`} />
+        <FaPaw className={`${css.paw} ${css.paw4}`} />
+      </div>
+    
       {loading && <p>Завантажуємо песиків…</p>}
       {error && <p>Помилка: {error}</p>}
 
@@ -119,19 +128,19 @@ export default function Gallery({ pageSize = 6 }) {
     </section>
   );
 }
-
 function Card({ dog }) {
   const genderChar = dog.gender === "female" ? "♀" : "♂";
   const ageText = `${dog.age.value} ${dog.age.unit}`;
 
   return (
-    <a className={css.card} href={dog.href}>
+    <Link className={css.card} href={dog.href}>
       <div className={css.imageWrap}>
         <Image
           src={dog.image}
           alt={dog.name}
           fill
           sizes="(max-width: 900px) 50vw, 33vw"
+          unoptimized
         />
       </div>
 
@@ -144,6 +153,6 @@ function Card({ dog }) {
         <p className={css.desc}>{dog.desc}</p>
         <span className={css.more}>Детальніше…</span>
       </div>
-    </a>
+    </Link>
   );
 }

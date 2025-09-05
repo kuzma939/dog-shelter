@@ -1,5 +1,66 @@
 
-.wraps { padding-top: 24px; }
+/* залишаємо як було */
+.wraps { position: relative; padding-top: 24px; }
+
+/* контейнер лап — виступає вгору, низ обрізається */
+.pawsWrap{
+  position: absolute;
+  left: 0; right: 0;
+  top: -160px;                   /* скільки лап «заходять» на секцію вище */
+  height: calc(100% + 160px);    /* щоб низ НІКОЛИ не ліз на «Останні події» */
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* контент над лапами */
+.grid, .pager { position: relative; z-index: 1; }
+
+/* --- лапи --- */
+.paw{
+  position: absolute;
+  color: #99621E;   /* колір з макету */
+  opacity: .20;     /* 20% */
+  mix-blend-mode: multiply;
+}
+
+/* верхня ліва (≈ 540×593, легкий поворот) */
+.paw1{
+  width: 540px; height: 593px;
+  left: -20px; top: 0;
+  transform: rotate(-25deg);
+}
+
+/* тепер .paw2 — велика центральна/нижча */
+.paw2{
+  width: 901px; height: 913px;
+  left: 470px;
+  top: 320px;
+  transform: rotate(-33deg);
+  z-index: 1;            /* нижче */
+}
+
+/* тепер .paw3 — права верхня */
+.paw3{
+  width: 828px; height: 824px;
+  right: 40px;
+  top: 40px;
+  transform: rotate(22deg);
+  z-index: 2;            /* вище */
+}
+
+/* ще одна зліва знизу (≈ 658×689) */
+.paw4{
+  position: absolute;
+  width: 658px; height: 689px;
+  left: -234px;         /* у макеті приблизно -234px */
+  top: 1988.64px;       /* як у Figma */
+  transform: rotate(24.93deg);
+  color: #99621E;
+  opacity: .20;
+  mix-blend-mode: multiply;
+}
+
 
 .grid {
   display: grid;

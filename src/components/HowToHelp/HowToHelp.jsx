@@ -1,6 +1,6 @@
 import css from "./HowToHelp.module.css";
 import { FaPaw } from "react-icons/fa";
-
+import Link from "next/link";
 export default function HowToHelp() {
   return (
     <div className={css.wrapper}>
@@ -18,7 +18,10 @@ export default function HowToHelp() {
           Ви не можете допомогти кожній тварині, але Ви можете ощасливити хоча б
           одну собаку! Подаруйте їм свою підтримку!
         </p>
-        <button className={css.button}>Допомогти тваринкам</button>
+        <Link href="/how-to-help#donate" className={css.button} role="button">
+          Допомогти тваринкам
+        </Link>
+       
       </div>
     </div>
   );

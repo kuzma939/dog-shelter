@@ -1,0 +1,9 @@
+.page {
+  padding-block: 32px;              
+}
+
+
+.page :global(.container) {
+  padding-inline: 16px;             
+  max-width: 1280px;                 
+}
