@@ -22,7 +22,7 @@ export const metadata = { title: "App", description: "…" };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="uk">
       <body
       className={`${montserrat.variable} ${montAlt.variable} antialiased`}
        

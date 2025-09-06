@@ -64,7 +64,9 @@ export default function Header({ overlay = false }) {
 
   <Link href="/how-to-help" role="menuitem" onClick={() => setOpen(false)}>Волонтерство</Link>
   <Link href={anchor("contacts")}   role="menuitem" onClick={() => setOpen(false)}>Контакти</Link>
-  <Link href={anchor("about")}      role="menuitem" onClick={() => setOpen(false)}>Про нас</Link>
+  <Link href="/about" role="menuitem" onClick={() => setOpen(false)}>Про нас</Link>
+
+
 </nav>
 
         </div>
