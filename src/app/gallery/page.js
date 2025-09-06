@@ -1,4 +1,4 @@
-import AnimalsBar from "../../components/AnimalsBar/AnimalsBar";
+import AnimalsBar from "../../components/AnimalsBar/AnimalsBar.jsx";
 import Gallery from "../../components/Gallery/Gallery";
 import BottomPhotos from "../../components/GalerryBottomPhotos/BottomPhotos.jsx";
 import css from "./page.module.css";

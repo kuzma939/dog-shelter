@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import { IoMdMale, IoMdFemale } from "react-icons/io";
-
+import Link from "next/link";
 export default function DogPage() {
   const { id } = useParams();
   const [dog, setDog] = useState(null);
@@ -90,10 +90,10 @@ export default function DogPage() {
       <p className="text-xl font-medium text-[#4b2e14] leading-relaxed mt-12 w-full">
         {dog.description}
       </p>
-
-      <button className="rounded-full w-[320px] py-5 bg-[#99621e] text-white font-semibold text-xl mt-10 shadow-lg hover:bg-[#7a4f18] transition">
-        Залишити Заявку
-      </button>
+ <Link href="/how-to-help"  aria-label="Залишити Заявку" className="rounded-full w-[320px] py-5 bg-[#99621e] text-white text-center font-semibold text-xl mt-10 shadow-lg hover:bg-[#7a4f18] transition">
+            <span> Залишити Заявку</span>
+          </Link>
+     
     </div>
   );
 }

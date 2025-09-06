@@ -2,9 +2,37 @@ import React from "react";
 import css from "./FAQ.module.css";
 import { GiCheckMark } from "react-icons/gi";
 import { FaPaw } from "react-icons/fa";
-import Image from "next/image.js";
+import Image from "next/image";
 import dog_faq from "../../../public/faq_dog.png";
+import SuccessModal from "../../components/SuccessModal/SuccessModal.jsx";
 export default function FAQ() {
+    const [open, setOpen] = useState(false);
+      const [loading, setLoading] = useState(false);
+
+  async function onSubmit(e) {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      // TODO: заміни URL на свій бекенд
+      const res = await fetch("/api/adoption", {
+        method: "POST",
+        body: new FormData(e.currentTarget),
+      });
+
+      if (!res.ok) throw new Error("Failed");
+
+      // якщо бек відповів успішно — показуємо модалку
+      setOpen(true);
+      e.currentTarget.reset();
+    } catch (err) {
+      // тут можна показати toast/error
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <div className="container">
       <div className={css.flex}>
@@ -104,6 +132,7 @@ export default function FAQ() {
           className={css.img}
         />
         <p className={css.pawP}>Допомогти може кожен</p>
+           <SuccessModal open={open} onClose={() => setOpen(false)} />
       </div>
     </div>
   );

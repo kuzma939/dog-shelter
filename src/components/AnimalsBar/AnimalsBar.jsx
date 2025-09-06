@@ -1,16 +1,15 @@
-// src/components/AnimalsBar/AnimalsBar.jsx
 "use client";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { selectFilters, selectFilteredCount, setFilters } from "@/redux/dogs/slice";
 import { FiSearch } from "react-icons/fi";
-import Filter from "../Filters/Filters";
+import Filter from "../Filters/Filters.jsx";
 import css from "./AnimalsBar.module.css";
 
 export default function AnimalsBar({
-  showCount = true,        // <-- додано
-  showSubtitle = true,     // <-- додано
+  showCount = true,        
+  showSubtitle = true,    
 }) {
   const dispatch = useDispatch();
   const { q } = useSelector(selectFilters);

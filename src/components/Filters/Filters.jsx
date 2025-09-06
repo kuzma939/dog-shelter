@@ -19,7 +19,7 @@ export default function Filter({ open, onClose }) {
   const count     = useSelector(selectFilteredCount);
   const sheetRef  = useRef(null);
 
-  // фолбеки тільки для UI; у сторі лишаються null (не фільтрують)
+
   const ageMin     = filters.ageMin ?? 0;
   const ageMax     = filters.ageMax ?? 20;
   const weightMin  = filters.weightMin ?? 0;
@@ -54,7 +54,6 @@ export default function Filter({ open, onClose }) {
 
         <h3 className={css.title}>Фільтр</h3>
 
-        {/* стать */}
         <div className={css.row}>
           <div className={css.label}>Стать</div>
           <div className={css.radios}>
@@ -99,7 +98,7 @@ export default function Filter({ open, onClose }) {
   min={0}
   max={20}
   value={ageMax}
-  onChange={(v) => dispatch(setFilters({ ageMax: v }))}  // лише max
+  onChange={(v) => dispatch(setFilters({ ageMax: v }))}  
   className={css.slider}
 />
 <div className={css.scale}><span>0</span><span>20</span></div>
@@ -107,7 +106,6 @@ export default function Filter({ open, onClose }) {
           </div>
         </div>
 
-        {/* вага */}
         <div className={css.row}>
           <div className={css.label}>Вага в кг</div>
           <div className={css.sliderBox}>

@@ -37,8 +37,8 @@ export default function Header({ overlay = false }) {
           <>
             <Link href="/gallery" className={css.button} role="button">Галерея</Link>
             <Link href={anchor("reviews")} className={css.button} role="button">Відгуки</Link>
-            <Link href={anchor("about")}   className={css.button} role="button">Про нас</Link>
-          </>
+              <Link href="/about" className={css.button}  role="menuitem" onClick={() => setOpen(false)}>Про нас</Link>
+ </>
         ) : (
           <Link href="/" className={css.button}>На Головну</Link>
         )}
