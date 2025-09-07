@@ -1,3 +1,5 @@
+'use client'; 
+import { useState } from 'react';    
 import React from "react";
 import css from "./FAQ.module.css";
 import { GiCheckMark } from "react-icons/gi";
