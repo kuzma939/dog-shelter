@@ -35,6 +35,10 @@
   width: 318px;
   height: 93px;
 
+  opacity: 0;
+  transform: translateY(12px);
+  animation: hero-fadeUp .7s ease forwards .35s;
+  
   display: flex;
   align-items: center;        
   justify-content: center;   
@@ -88,4 +92,57 @@
   font-weight: 600;
   font-size: 32px;
   line-height: 55px;
+}
+
+.bg {
+  will-change: transform;
+  animation: hero-kenburns 22s ease-in-out infinite alternate;
+}
+@keyframes hero-kenburns {
+  0%   { transform: scale(1) translate3d(0,0,0); }
+  100% { transform: scale(1.08) translate3d(2%, -1%, 0); }
+}
+
+
+
+.info .line {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: hero-fadeUp .6s ease forwards;
+}
+.info .line:nth-child(1) { animation-delay: .45s; }
+.info .line:nth-child(2) { animation-delay: .60s; }
+.info .line:nth-child(3) { animation-delay: .75s; }
+.info .line:nth-child(4) { animation-delay: .90s; }
+
+@keyframes hero-fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.button:hover,
+.cta:hover { 
+  background: var(--brand-600); 
+  transform: translateY(-2px); 
+}
+
+.button:active { transform: translateY(0) scale(.98); }
+
+.button > span,
+.cta > span {
+  white-space: nowrap;
+  text-align: center;
+  font-family: "Montserrat Alternates","Montserrat",Arial,Helvetica,sans-serif;
+  font-weight: 700;
+  font-size: 31.74px;
+  line-height: 1;
+  letter-spacing: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translateY(-1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg, .button, .info .line { animation: none !important; }
+  .button, .info .line { opacity: 1; transform: none; }
 }

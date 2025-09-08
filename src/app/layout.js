@@ -3,7 +3,7 @@ import Header from "../components/Header/Header.jsx";
 import Footer from "../components/Footer/Footer.jsx";
 import { Providers } from "../redux/Providers.jsx";
 import { Montserrat, Montserrat_Alternates } from "next/font/google";
-
+import DevScrollFix from "./DevScrollFix"; 
 const montserrat = Montserrat({
   variable: "--font-sans",              
   subsets: ["latin", "cyrillic"],
@@ -27,6 +27,7 @@ export default function RootLayout({ children }) {
       className={`${montserrat.variable} ${montAlt.variable} antialiased`}
        
       >
+          <DevScrollFix />
         <Providers>
           <Header />
           {children}
