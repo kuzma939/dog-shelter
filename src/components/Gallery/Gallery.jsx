@@ -3,7 +3,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { FaPaw } from "react-icons/fa";   
+import { FaPaw } from "react-icons/fa";
 import {
   fetchDogs,
   selectFilteredDogs,
@@ -12,7 +12,7 @@ import {
 } from "@/redux/dogs/slice";
 import Image from "next/image";
 import css from "./Gallery.module.css";
-
+import Loader from "../Loader/Loader.jsx";
 
 const API_HOST =
   process.env.NEXT_PUBLIC_API_HOST ||
@@ -32,14 +32,15 @@ export default function Gallery({ pageSize = 6 }) {
 
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
-  const filtered = useSelector(selectFilteredDogs); 
+  const filtered = useSelector(selectFilteredDogs);
 
   const [page, setPage] = useState(0);
   const rootRef = useRef(null);
 
-  useEffect(() => { dispatch(fetchDogs()); }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchDogs());
+  }, [dispatch]);
 
-  
   const items = useMemo(
     () =>
       filtered.map((d) => {
@@ -48,7 +49,10 @@ export default function Gallery({ pageSize = 6 }) {
         const age =
           typeof d.age === "object"
             ? d.age
-            : { value: Number(d.age ?? d.ageValue ?? 0), unit: d.ageUnit ?? "роки" };
+            : {
+                value: Number(d.age ?? d.ageValue ?? 0),
+                unit: d.ageUnit ?? "роки",
+              };
 
         return {
           id: d._id ?? d.id,
@@ -69,8 +73,9 @@ export default function Gallery({ pageSize = 6 }) {
     return items.slice(start, start + pageSize);
   }, [items, page, pageSize]);
 
-  
-  useEffect(() => { setPage(0); }, [items.length]);
+  useEffect(() => {
+    setPage(0);
+  }, [items.length]);
 
   useEffect(() => {
     rootRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -81,15 +86,14 @@ export default function Gallery({ pageSize = 6 }) {
 
   return (
     <section ref={rootRef} className={`container ${css.wraps}`} id="adopt">
-       <div className={css.pawsWrap} aria-hidden="true">
+      <div className={css.pawsWrap} aria-hidden="true">
         <FaPaw className={`${css.paw} ${css.paw1}`} />
         <FaPaw className={`${css.paw} ${css.paw2}`} />
         <FaPaw className={`${css.paw} ${css.paw3}`} />
         <FaPaw className={`${css.paw} ${css.paw4}`} />
       </div>
-          
 
-      {loading && <p>Завантажуємо песиків…</p>}
+      {loading && <Loader />}
       {error && <p>Помилка: {error}</p>}
 
       <div className={css.grid}>
@@ -107,12 +111,21 @@ export default function Gallery({ pageSize = 6 }) {
             aria-label="Попередня"
           >
             <svg width="20" height="40" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path
+                d="M15 18l-6-6 6-6"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </button>
 
           <span className={css.counter}>
-            <b>{page + 1}</b><span className={css.sep}>/</span>{totalPages}
+            <b>{page + 1}</b>
+            <span className={css.sep}>/</span>
+            {totalPages}
           </span>
 
           <button
@@ -122,7 +135,14 @@ export default function Gallery({ pageSize = 6 }) {
             aria-label="Наступна"
           >
             <svg width="20" height="40" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path
+                d="M9 6l6 6-6 6"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </button>
         </div>
@@ -148,7 +168,9 @@ function Card({ dog }) {
 
       <div className={css.info}>
         <div className={css.title}>
-          <span className={css.gender} aria-hidden="true">{genderChar}</span>
+          <span className={css.gender} aria-hidden="true">
+            {genderChar}
+          </span>
           <span className={css.name}>{dog.name}</span>
           <span className={css.age}>{ageText}</span>
         </div>
@@ -158,7 +180,8 @@ function Card({ dog }) {
     </Link>
   );
 }
-{/*"use client";
+{
+  /*"use client";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -370,4 +393,5 @@ function Card({ dog, match }) {
       </div>
     </Link>
   );
-} */}
+} */
+}
