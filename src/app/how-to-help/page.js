@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { LiaHandshakeSolid } from "react-icons/lia";
 import { GiReceiveMoney } from "react-icons/gi";
@@ -5,6 +6,50 @@ import { FaHandHoldingHeart } from "react-icons/fa";
 import { FaPaw } from "react-icons/fa";
 
 export default function HowToHelp() {
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+
+    const payload = {
+      fullName: (fd.get("fullName") || "").toString().trim(),
+      helpType: fd.get("helpType") || "Фінансова допомога",
+      email: (fd.get("email") || "").toString().trim(),
+      preferredContact: fd.get("preferredContact") || "Електронна пошта",
+      phone: (fd.get("phone") || "").toString().trim() || undefined,
+      comment: (fd.get("comment") || "").toString().trim() || undefined,
+      agree: form.querySelector("#agree")?.checked ?? false,
+    };
+
+    if (!payload.fullName) return alert("Вкажіть прізвище та ім’я.");
+    if (!payload.email) return alert("Вкажіть електронну пошту.");
+    if (!payload.agree) return alert("Потрібна згода на обробку інформації.");
+    if (payload.preferredContact === "Телефон" && !payload.phone) {
+      return alert("Обрано 'Телефон' — номер обов'язковий.");
+    }
+
+    try {
+      const res = await fetch("http://localhost:8080/help-requests", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        console.error("Submit error:", err);
+        return alert(
+          "Помилка відправки. Перевірте поля або спробуйте пізніше."
+        );
+      }
+
+      alert("Дякуємо! Заявку відправлено.");
+      form.reset();
+    } catch (err) {
+      console.error(err);
+      alert("Не вдалося підключитися до сервера.");
+    }
+  }
   return (
     <div className="relative">
       <FaPaw className="text-[#99621e] opacity-10 mix-blend-multiply w-[500px] h-[420px] rotate-45 absolute top-[-90px] left-0 -z-10" />
@@ -59,21 +104,27 @@ export default function HowToHelp() {
         </div>
       </div>
       <section className=" mx-auto pb-30">
-        <form className="bg-[rgba(153,98,30,0.6)] pr-[188px] pl-[296px] pt-40 pb-20 flex flex-col gap-6 mb-40 relative">
-          <h2 className="text-center text-2xl font-bold mb-6">
-            Форма зворотнього зв’язку
-          </h2>
+        <form
+          id="helpForm"
+          onSubmit={handleSubmit}
+          className="bg-[rgba(153,98,30,0.6)] pr-[188px] pl-[296px] pt-40 pb-20 flex flex-col gap-6 mb-40 relative"
+        >
+          {/* додай name атрибути! */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="flex flex-col gap-2">
               <label>Прізвище та ім’я</label>
               <input
+                name="fullName"
                 type="text"
                 className="rounded-full px-4 py-2 focus:outline-none bg-white w-[305px]"
               />
             </div>
             <div className="flex flex-col gap-2">
               <label>Як саме ви хочете допомогти</label>
-              <select className="rounded-full px-4 py-2 focus:outline-none w-[305px] bg-white">
+              <select
+                name="helpType"
+                className="rounded-full px-4 py-2 focus:outline-none w-[305px] bg-white"
+              >
                 <option>Фінансова допомога</option>
                 <option>Волонтерство</option>
                 <option>Інше</option>
@@ -85,13 +136,17 @@ export default function HowToHelp() {
             <div className="flex flex-col gap-2">
               <label>Електронна пошта</label>
               <input
+                name="email"
                 type="email"
                 className="rounded-full px-4 py-2 focus:outline-none bg-white w-[305px]"
               />
             </div>
             <div className="flex flex-col gap-2">
               <label>Зручний спосіб контакту (пошта/телефон)</label>
-              <select className="rounded-full px-4 py-2 focus:outline-none w-[305px] bg-white">
+              <select
+                name="preferredContact"
+                className="rounded-full px-4 py-2 focus:outline-none w-[305px] bg-white"
+              >
                 <option>Електронна пошта</option>
                 <option>Телефон</option>
               </select>
@@ -102,6 +157,7 @@ export default function HowToHelp() {
             <div className="flex flex-col gap-2">
               <label>Контактний номер</label>
               <input
+                name="phone"
                 type="tel"
                 placeholder="+380"
                 className="rounded-full px-4 py-2 focus:outline-none bg-white w-[305px]"
@@ -109,7 +165,10 @@ export default function HowToHelp() {
             </div>
             <div className="flex flex-col gap-2">
               <label>Коментар</label>
-              <textarea className="rounded-2xl px-4 py-2 focus:outline-none min-h-[120px] bg-white w-[522px]"></textarea>
+              <textarea
+                name="comment"
+                className="rounded-2xl px-4 py-2 focus:outline-none min-h-[120px] bg-white w-[522px]"
+              ></textarea>
             </div>
           </div>
 
@@ -118,9 +177,11 @@ export default function HowToHelp() {
             <label htmlFor="agree">Я погоджуюсь на обробку інформації</label>
           </div>
         </form>
+
         <button
           type="submit"
-          className="rounded-[50px] w-[516px] h-[93px] bg-[#99621e] text-white  mx-auto block"
+          form="helpForm"
+          className="rounded-[50px] w-[516px] h-[93px] bg-[#99621e] text-white mx-auto block"
         >
           Залишити заявку
         </button>
