@@ -29,11 +29,14 @@ export default function HowToHelp() {
     }
 
     try {
-      const res = await fetch("http://localhost:8080/help-requests", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      const res = await fetch(
+        "https://dog-shelter-api-66zi.onrender.com/help-requests",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
 
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
