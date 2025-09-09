@@ -36,7 +36,9 @@ export default function Header({ overlay = false }) {
         {isHome ? (
           <>
             <Link href="/gallery" className={css.button} role="button">Галерея</Link>
-            <Link href={anchor("reviews")} className={css.button} role="button">Відгуки</Link>
+         <Link href="/reviews" className={css.button} role="button">
+  Відгуки
+</Link>
               <Link href="/about" className={css.button}  role="menuitem" onClick={() => setOpen(false)}>Про нас</Link>
  </>
         ) : (
@@ -64,6 +66,9 @@ export default function Header({ overlay = false }) {
 
   <Link href="/how-to-help" role="menuitem" onClick={() => setOpen(false)}>Волонтерство</Link>
   <Link href={anchor("contacts")}   role="menuitem" onClick={() => setOpen(false)}>Контакти</Link>
+   <Link href="/reviews" role="menuitem" onClick={() => setOpen(false)}>
+  Відгуки
+</Link>
   <Link href="/about" role="menuitem" onClick={() => setOpen(false)}>Про нас</Link>
 
 
