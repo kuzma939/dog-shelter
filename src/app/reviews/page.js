@@ -108,7 +108,6 @@ export default function Reviews() {
   const [page, setPage] = useState(1);
   const [sessionId, setSessionId] = useState(null);
 
-  // для "читати більше"
   const [expanded, setExpanded] = useState(new Set());
   const toggleExpand = (id) =>
     setExpanded((prev) => {
@@ -234,53 +233,65 @@ export default function Reviews() {
   return (
     <div className="container">
       <h2 className="mb-[67px] mt-8 font-bold text-6xl text-center">Відгуки</h2>
+{page === 1 && (
+  <>
+    {/* Герой-блок: фото + великий текст */}
+    <div className="mt-[180px] flex flex-col md:flex-row items-start gap-12">
+      <NextImage
+        src={main}
+        alt="Decorative picture with dog"
+        width={413}
+        height={478}
+        className="shrink-0 rounded-lg object-cover"
+      />
+      <p className="font-medium text-2xl leading-[1.6] md:flex-1 max-w-[700px]">
+        «Я давно мріяв про собаку, і коли дізнався про цей притулок, вирішив
+        спробувати знайти тут свого друга та познайомився з дівчинкою на ім’я
+        Луна — вона одразу підбігла й подивилася такими довірливими очима, що
+        я зрозумів: це моя собака. Волонтери дуже допомогли, розповіли про її
+        характер та особливості догляду. Уже кілька місяців Луна живе зі мною
+        вдома — вона стала найвірнішим другом і наповнила життя теплом та
+        радістю. Я безмежно вдячний притулку за їхню працю та за те, що
+        подарували мені справжнього члена сім’ї.»
+      </p>
+    </div>
 
-      <div className="flex gap-[140px]">
-        <NextImage src={main} alt="Decorative picture with dog" width={413} height={478} />
-        <p className="font-medium text-2xl pr-30">
-          «Я давно мріяв про собаку, і коли дізнався про цей притулок, вирішив
-          спробувати знайти тут свого друга та познайомився з дівчинкою на ім’я
-          Луна — вона одразу підбігла й подивилася такими довірливими очима, що
-          я зрозумів: це моя собака. Волонтери дуже допомогли, розповіли про її
-          характер та особливості догляду. Уже кілька місяців Луна живе зі мною
-          вдома — вона стала найвірнішим другом і наповнила життя теплом та
-          радістю. Я безмежно вдячний притулку за їхню працю та за те, що
-          подарували мені справжнього члена сім’ї.»
+    {/* 4 статичних відгуки */}
+    <div className="mt-[100px] grid grid-cols-1 md:grid-cols-2 gap-[100px]">
+      <div className="w-full flex items-end gap-8">
+        <NextImage src={img1} width={288} height={370} alt="Decorative picture with dog" />
+        <p className="font-medium text-lg">
+          «Ми взяли Барні кілька місяців тому, і він чудово вписався в нашу сім’ю. Це
+          найрадісніший і найвідданіший пес, якого можна уявити.»
         </p>
       </div>
 
-      {page === 1 && (
-        <div className="mt-[180px] grid grid-cols-1 md:grid-cols-2 gap-[100px]">
-          <div className="w-full flex items-end gap-8">
-            <NextImage src={img1} width={288} height={370} alt="Decorative picture with dog" />
-            <p className="font-medium text-lg">
-              «Ми взяли Барні кілька місяців тому, і він чудово вписався в нашу сім’ю. Це
-              найрадісніший і найвідданіший пес, якого можна уявити.»
-            </p>
-          </div>
-          <div className="w-full flex items-end gap-8">
-            <NextImage width={288} height={370} src={img2} alt="Decorative picture with dog" />
-            <p className="font-medium text-lg">
-              «Притулок допоміг нам знайти справжнього друга — собаку на ім’я Белла. Вона
-              ніжна й лагідна, і тепер ми не уявляємо життя без неї.»
-            </p>
-          </div>
-          <div className="w-full flex items-end gap-8">
-            <NextImage width={288} height={370} src={img3} alt="Decorative picture with dog" />
-            <p className="font-medium text-lg">
-              «Я прихистила молодого пса Чарлі, і він одразу став моїм напарником у пробіжках.
-              Дуже вдячна волонтерам за підтримку та поради.»
-            </p>
-          </div>
-          <div className="w-full flex items-end gap-8">
-            <NextImage width={288} height={370} src={img4} alt="Decorative picture with dog" />
-            <p className="font-medium text-lg">
-              «Забрали до себе собачку Мілу, і вона швидко подружилася з дітьми. Тепер у нашому
-              домі ще більше радості й сміху.»
-            </p>
-          </div>
-        </div>
-      )}
+      <div className="w-full flex items-end gap-8">
+        <NextImage width={288} height={370} src={img2} alt="Decorative picture with dog" />
+        <p className="font-medium text-lg">
+          «Притулок допоміг нам знайти справжнього друга — собаку на ім’я Белла. Вона
+          ніжна й лагідна, і тепер ми не уявляємо життя без неї.»
+        </p>
+      </div>
+
+      <div className="w-full flex items-end gap-8">
+        <NextImage width={288} height={370} src={img3} alt="Decorative picture with dog" />
+        <p className="font-medium text-lg">
+          «Я прихистила молодого пса Чарлі, і він одразу став моїм напарником у пробіжках.
+          Дуже вдячна волонтерам за підтримку та поради.»
+        </p>
+      </div>
+
+      <div className="w-full flex items-end gap-8">
+        <NextImage width={288} height={370} src={img4} alt="Decorative picture with dog" />
+        <p className="font-medium text-lg">
+          «Забрали до себе собачку Мілу, і вона швидко подружилася з дітьми. Тепер у нашому
+          домі ще більше радості й сміху.»
+        </p>
+      </div>
+    </div>
+  </>
+)}
 
   
       {page > 1 && (
@@ -381,65 +392,151 @@ export default function Reviews() {
       >
         Залишити коментар
       </button>
+{open && (
+  <div
+    className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50"
+    onClick={(e) => {
+      if (e.target === e.currentTarget) setOpen(false);
+    }}
+  >
+    <form
+      onSubmit={submitReview}
+      className="
+        w-full max-w-[560px]
+        bg-white rounded-[20px]
+        shadow-[0_8px_30px_rgba(0,0,0,0.12)]
+        border border-[#E6E6E6]
+        px-6 py-5
+      "
+    >
+      {/* Заголовок */}
+      <h3 className="text-[20px] leading-[1.2] font-medium text-[#2A2A2A] mb-4 text-center">
+        Залиште свій відгук
+      </h3>
 
-      {open && (
+      {/* Лейбл до фото */}
+      <label className="block mb-2 text-[14px] leading-[1.2] text-[#6F6F6F]">
+        Додайте фото (необов’язково)
+      </label>
+
+      {/* Зона завантаження (плейсхолдер з пунктиром) */}
+      <div className="relative mb-4">
         <div
-          className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setOpen(false);
-          }}
+          className="
+            h-[170px] w-full
+            rounded-[16px]
+            bg-[#F3F3F3]
+            border border-dashed border-[#CFCFCF]
+            flex items-center justify-center
+          "
         >
-          <form onSubmit={submitReview} className="bg-white rounded-2xl w-full max-w-[640px] p-6 shadow-xl">
-            <h3 className="text-2xl font-bold mb-4">Залиште свій відгук</h3>
-
-            <label className="block mb-2 text-sm font-medium">
-              Фото (JPG/PNG/WebP, необов’язково)
-            </label>
-            {imgPreview && (
-              <NextImage
-                src={imgPreview}
-                alt="Превʼю"
-                width={800}
-                height={500}
-                className="w-full h-56 object-cover rounded-xl mb-3"
-                unoptimized
-              />
-            )}
-            <input
-              type="file"
-              accept=".jpg,.jpeg,.png,.webp"
-              onChange={onFileChange}
-              className="block w-full mb-2"
-            />
-            {fileError && <p className="text-red-600 text-sm mb-3">{fileError}</p>}
-
-            <label className="block mb-2 text-sm font-medium">Ваш відгук</label>
-            <textarea
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              rows={5}
-              className="w-full border rounded-xl p-3 mb-5"
-              placeholder="Напишіть ваш коментар…"
-            />
-
-            <div className="flex justify-end gap-3">
-              <button
-                type="button"
-                onClick={() => {
-                  resetForm();
-                  setOpen(false);
-                }}
-                className="px-4 py-2 rounded-lg border"
+          {!imgPreview && (
+            <div className="flex flex-col items-center gap-2 select-none">
+              <div
+                className="
+                  w-10 h-10 rounded-full
+                  border border-[#BDBDBD]
+                  flex items-center justify-center
+                  text-[#8B8B8B] text-2xl
+                "
               >
-                Скасувати
-              </button>
-              <button type="submit" className="px-4 py-2 rounded-lg bg-[#99621e] text-white">
-                Відправити
-              </button>
+                +
+              </div>
+              <span className="text-[12px] text-[#8B8B8B]">
+                JPG / PNG / WebP
+              </span>
             </div>
-          </form>
+          )}
+
+          {imgPreview && (
+            // використовую NextImage, як і в тебе
+            <NextImage
+              src={imgPreview}
+              alt="Превʼю"
+              width={1000}
+              height={600}
+              className="absolute inset-0 w-full h-full object-cover rounded-[16px]"
+              unoptimized
+            />
+          )}
         </div>
+
+        {/* Ховаємо input, але робимо клікабельною всю зону */}
+        <input
+          type="file"
+          accept=".jpg,.jpeg,.png,.webp"
+          onChange={onFileChange}
+          className="absolute inset-0 opacity-0 cursor-pointer"
+          title=""
+          aria-label="Завантажити фото"
+        />
+      </div>
+
+      {fileError && (
+        <p className="text-[#D92D20] text-[12px] mb-4">{fileError}</p>
       )}
+
+      {/* Лейбл до textarea */}
+      <label className="block mb-2 text-[14px] leading-[1.2] text-[#6F6F6F]">
+        Ваш відгук
+      </label>
+
+      {/* Поле вводу тексту */}
+      <textarea
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        rows={6}
+        placeholder="Напишіть ваш коментар…"
+        className="
+          w-full
+          rounded-[20px]
+          border-2 border-[#CFCFCF]
+          focus:border-[#B8B8B8] focus:outline-none
+          px-4 py-3
+          text-[14px] text-[#2A2A2A]
+          placeholder:text-[#B3B3B3]
+          mb-5
+        "
+      />
+
+      {/* Кнопки */}
+      <div className="flex justify-end gap-3">
+        <button
+          type="button"
+          onClick={() => {
+            resetForm();
+            setOpen(false);
+          }}
+          className="
+            h-[44px] px-5
+            rounded-[20px]
+            border border-[#000000]
+            text-[14px] font-medium text-[#2A2A2A]
+            bg-white
+            hover:bg-[#F7F7F7] transition
+          "
+        >
+          Скасувати
+        </button>
+
+        <button
+          type="submit"
+          className="
+            h-[44px] px-6
+            rounded-[20px]
+            text-[14px] font-semibold
+            bg-[#99621e] text-white
+            shadow-[0_2px_0_rgba(0,0,0,0.25)] 
+            hover:opacity-95 active:translate-y-[1px] transition
+          "
+        >
+          Відправити
+        </button>
+      </div>
+    </form>
+  </div>
+)}
+
     </div>
   );
 }

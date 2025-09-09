@@ -30,7 +30,6 @@ body {
   color: var(--foreground);
     font-family: var(--font-sans), system-ui, -apple-system, Arial, Helvetica, sans-serif;
 
-  background-image: url("/patterns/paws.svg");
   background-repeat: repeat;
   background-size: 600px 600px;
   background-position: 0 0;
