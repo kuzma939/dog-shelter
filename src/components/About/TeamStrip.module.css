@@ -1,49 +1,38 @@
+/* === CARD ====================================================== */
 .card{
   position: relative;
   flex: 0 0 414px;
   width: 414px;
-  aspect-ratio: 414 / 489;  
+  aspect-ratio: 414 / 489;
   height: auto;
   scroll-snap-align: start;
 }
 
-.scrollerWrap{ position: relative; isolation: isolate; }
+/* === SCROLLER ================================================== */
+.scrollerWrap{
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+}
 
+/* Без скролу, лишаємо ту саму «рейку» */
 .rail{
   display: flex;
   gap: 24px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
   margin-inline: -24px;
   padding: 6px 24px 32px;
-  overscroll-behavior-x: contain;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch; 
-}
-.rail::-webkit-scrollbar{ display: none; }
 
+  overflow-x: visible;        /* було auto → забрали скрол */
+  scroll-snap-type: none;     /* вимкнули снапінг */
+  overscroll-behavior-x: auto;
+  -webkit-overflow-scrolling: auto;
+}
+
+/* градієнти по краях більше не потрібні */
 .scrollerWrap::before,
-.scrollerWrap::after{
-  content: "";
-  position: absolute;
-  top: 0; bottom: 0;
-  width: 24px;
-  pointer-events: none;
-  z-index: 2;
-}
-.scrollerWrap::before{
-  left: 0;
-  background: linear-gradient(to right, var(--background, #fff7ef), transparent);
-}
-.scrollerWrap::after{
-  right: 0;
-  background: linear-gradient(to left, var(--background, #fff7ef), transparent);
-}
-@media (prefers-color-scheme: dark){
-  .scrollerWrap::before{ background: linear-gradient(to right, #0a0a0a, transparent); }
-  .scrollerWrap::after{  background: linear-gradient(to left,  #0a0a0a, transparent);  }
-}
+.scrollerWrap::after{ display: none; }
 
+/* === POSTER & HOVER ZOOM ====================================== */
 .poster{
   position: absolute;
   inset: 0;
@@ -52,13 +41,33 @@
   box-shadow: 0 18px 36px rgba(0,0,0,.14);
   will-change: transform;
 }
+
+/* базовий стан картинки */
 .poster :global(img){
   object-fit: cover;
-  transform: scale(1.001);
-  transition: transform .25s ease;
+  transform: scale(1);
+  transform-origin: center center;
+  transition: transform .35s ease;
+  will-change: transform;
 }
-.card:hover .poster :global(img){ transform: scale(1.02); }
 
+/* зум при наведенні САМЕ на фото (та з клавіші Tab) */
+@media (hover: hover) and (pointer: fine){
+  .poster:hover :global(img),
+  .poster:focus-visible :global(img){
+    transform: scale(1.06);
+  }
+}
+
+/* доступність */
+@media (hover: none){
+  .poster :global(img){ transform: none !important; }
+}
+@media (prefers-reduced-motion: reduce){
+  .poster :global(img){ transition: none; transform: none; }
+}
+
+/* градієнт поверх фото (залишив як у тебе) */
 .poster::after{
   content: "";
   position: absolute;
@@ -72,6 +81,7 @@
   pointer-events: none;
 }
 
+/* === CAPTION =================================================== */
 .caption{
   position: absolute;
   left: 24px; right: 24px; bottom: 22px;
@@ -86,10 +96,11 @@
   font-size: 12px; letter-spacing: .02em; opacity: .95;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;  
+  -webkit-line-clamp: 2;
   overflow: hidden;
 }
 
+/* === NAV BUTTONS (без змін) =================================== */
 .navBtn{
   position: absolute;
   top: 50%; transform: translateY(-50%);
@@ -114,14 +125,27 @@
   .navBtn:hover{ background: #2a2a2a; }
 }
 
+/* === LAYOUT: 4 картки без скролу на десктопі ================== */
+@media (min-width: 1024px){
+  .card{
+    /* (100% - 3*gap) / 4 — рівно 4 колонки з відступами */
+    flex: 0 0 calc((100% - 3*24px) / 4);
+    width: calc((100% - 3*24px) / 4);
+    max-width: 414px; /* як у макеті */
+  }
+}
+
+/* === MOBILE ==================================================== */
+/* Щоб не було горизонтального скролу на вузьких екранах — дозволяємо перенос */
 @media (max-width: 900px){
+  .rail{ flex-wrap: wrap; }
   .card{
     flex-basis: min(86vw, 414px);
     width: min(86vw, 414px);
   }
 }
 
+/* === ACCESSIBILITY ============================================ */
 @media (prefers-reduced-motion: reduce){
-  .card:hover .poster :global(img){ transform: none; }
   .navBtn{ transition: none; }
 }

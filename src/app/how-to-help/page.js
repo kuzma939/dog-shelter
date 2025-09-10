@@ -122,7 +122,7 @@ export default function HowToHelp() {
 
       <section className=" mx-auto pb-30">
         <h3 className="mb-[-70px] flex justify-center font-bold text-3xl !text-[#100800]">
-          Форма зворотнього зв'язку
+          Форма зворотнього звязку
         </h3>
         <form
           id="helpForm"
