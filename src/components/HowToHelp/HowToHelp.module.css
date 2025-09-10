@@ -8,7 +8,9 @@
     url("/how_to_help.png") center/cover no-repeat,
     var(--background);
 
- 
+ --foreground: #fff;
+
+  --heroShade: .45;
   background-size: auto;
 }
 
