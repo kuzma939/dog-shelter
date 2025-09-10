@@ -8,6 +8,10 @@
   overflow: hidden;
 
 }
+.hero :global(.container) {
+  padding-left: 0;
+  padding-right: 0;
+}
 
 .bg {
   position: absolute;
@@ -33,7 +37,7 @@ z-index: 1;
 }
 .button {
   position: absolute;
-  left: 80px;
+  left: 50px;
   top: 606px;
 
   width: 318px;
@@ -50,7 +54,8 @@ z-index: 1;
   padding: 0 28px;         
   gap: 0;                    
   background: #99621E;
-  color: #fff;
+
+   color: var(--hero-text); 
   text-decoration: none;
   border-radius: 40px;
   box-shadow: 0 12px 28px rgba(0,0,0,.25);
@@ -75,9 +80,10 @@ z-index: 1;
 
 .info {
   position: absolute;
-  right: 100px;
+  right: 50px;
   top: 328px;                 
   text-align: right;
+    color: var(--hero-text);  
   text-shadow: 0 2px 10px rgba(0,0,0,.45);
   font-family: "Montserrat Alternates","Montserrat",Arial,Helvetica,sans-serif;
 }
@@ -139,7 +145,8 @@ z-index: 1;
   font-family: "Montserrat Alternates","Montserrat",Arial,Helvetica,sans-serif;
   font-weight: 700;
   font-size: 31.74px;
-  line-height: 1;
+    line-height: 55.55px;            
+
   letter-spacing: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
