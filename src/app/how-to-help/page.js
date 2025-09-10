@@ -66,46 +66,47 @@ export default function HowToHelp() {
       <h2 className="font-bold text-[64px] text-center relative z-10 mb-30">
         Як допомогти
       </h2>
-      <div className="flex flex-col gap-[52px] mb-[230px] ">
-        <div className="pl-[190px] pr-[215px] relative bg-white  pt-30 pb-40">
-          <LiaHandshakeSolid className="size-[117px] text-[#99621e] absolute top-[100px] left-16" />
-          <h3 className="font-bold text-[32px] mb-7">Волонтерство</h3>
-          <p className="text-2xl">
-            Волонтерство — це можливість подарувати безпритульним собакам увагу,
+        <div className="flex flex-col gap-[52px] mb-[230px] ">
+        {/* Волонтерство */}
+<div className="pl-[190px] pr-[215px] relative bg-white text-[#1a1a1a] pt-30 pb-40">
+  <LiaHandshakeSolid className="size-[117px] text-[#99621e] absolute top-[100px] left-16" />
+  <h3 className="font-bold text-[32px] mb-7 text-[#1a1a1a]">Волонтерство</h3>
+  <p className="text-2xl text-[#1a1a1a]">  Волонтерство — це можливість подарувати безпритульним собакам увагу,
             тепло та турботу. Ви можете допомогти вигулювати наших хвостиків,
             прибрати у вольєрах, погратися з ними чи пригостити смачним кормом.
             Навіть кілька годин вашого часу стають для них справжнім святом.
             Кожен дотик, прогулянка чи усмішка роблять собак щасливішими та
             ближчими до нової родини. Долучайтеся — разом ми можемо подарувати
-            їм більше любові та шанс на краще життя.
-          </p>
-        </div>
-        <div className="pl-[190px] pr-[215px] relative bg-white  pt-30 pb-40">
-          <GiReceiveMoney className="size-[117px] text-[#99621e] absolute top-[60px] left-16" />
-          <h3 className="font-bold text-[32px] mb-7">Фінансова підтримка</h3>
-          <p className="text-2xl">
-            Фінансова допомога — це ще один спосіб врятувати життя безпритульних
+            їм більше любові та шанс на краще життя.</p>
+</div>
+
+{/* Фінансова підтримка */}
+<div className="pl-[190px] pr-[215px] relative bg-white text-[#1a1a1a] pt-30 pb-40">
+  <GiReceiveMoney className="size-[117px] text-[#99621e] absolute top-[60px] left-16" />
+  <h3 className="font-bold text-[32px] mb-7 text-[#1a1a1a]">Фінансова підтримка</h3>
+  <p className="text-2xl text-[#1a1a1a]"> Фінансова допомога — це ще один спосіб врятувати життя безпритульних
             собак. Ваші внески йдуть на корм, ліки, вакцинацію, стерилізацію та
             облаштування вольєрів. Навіть невелика сума допомагає нашим
             хвостикам отримати все необхідне для здоров’я та безпеки. Завдяки
             вашій підтримці ми можемо піклуватися про більшу кількість тварин і
             швидше знаходити їм нові домівки. Разом ми здатні зробити великий
-            добрий крок — подарувати собакам шанс на щасливе майбутнє.
-          </p>
-        </div>
-        <div className="pl-[190px] pr-[215px] relative bg-white pt-30 pb-40 ">
-          <FaHandHoldingHeart className="size-[117px] text-[#99621e] absolute top-[60px] left-16" />
-          <h3 className="font-bold text-[32px] mb-7">Теплі подарунки</h3>
-          <p className="text-2xl">
-            Крім часу та фінансів, допомогти можна й простими речами. Наші
+            добрий крок — подарувати собакам шанс на щасливе майбутнє.</p>
+</div>
+
+{/* Теплі подарунки */}
+<div className="pl-[190px] pr-[215px] relative bg-white text-[#1a1a1a] pt-30 pb-40">
+  <FaHandHoldingHeart className="size-[117px] text-[#99621e] absolute top-[60px] left-16" />
+  <h3 className="font-bold text-[32px] mb-7 text-[#1a1a1a]">Теплі подарунки</h3>
+  <p className="text-2xl text-[#1a1a1a]">Крім часу та фінансів, допомогти можна й простими речами. Наші
             собаки завжди потребують ковдр, підстилок, мисок, іграшок та інших
             корисних дрібниць. Такі подарунки роблять їхній побут теплішим,
             комфортнішим і трохи ближчим до домашнього життя. Передаючи речі, ви
             даруєте хвостику турботу і шматочок тепла, яке він так чекає від
-            людини.
-          </p>
-        </div>
+            людини.</p>
+</div>
+
       </div>
+     
       <section className=" mx-auto pb-30">
         <form
           id="helpForm"

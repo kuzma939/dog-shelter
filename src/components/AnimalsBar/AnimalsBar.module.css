@@ -1,54 +1,63 @@
-
 .wrap {
   padding-top: 24px;
   padding-bottom: 12px;
   text-align: center;
+  color: var(--text);
 }
 
 
 .count {
   font-weight: 800;
-  font-size: 64px;
+  font-size: clamp(40px, 6vw, 64px);
   line-height: 1;
   margin: 0 auto 8px;
-  
+  color: var(--text);
 }
 
 
 .subtitle{
-  width: 1226px;              
+  width: min(100%, 1226px);    
   margin: 0 auto 16px;
   text-align: center;
 
   font-weight: 600;
-  font-size: 32px;
-  line-height: 55.55px;
-  color: rgba(28,28,28,.78);
+  font-size: clamp(18px, 2.2vw, 32px);
+  line-height: 1.45;
+  color: color-mix(in oklab, var(--text) 78%, var(--background));
 
-  white-space: nowrap;      
-  overflow: hidden;            
-  text-overflow: ellipsis;     
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+@media (max-width: 768px){
+  .subtitle{ white-space: normal; overflow: visible; text-overflow: clip; }
+}
+
 
 .controls {
   margin: 8px auto 0;
+  width: min(100%, 1226px);
   display: grid;
-  grid-template-columns: 733px auto;
-  gap: 24px;
+  grid-template-columns: minmax(260px, 1fr) auto; 
+  gap: clamp(12px, 2vw, 24px);
   align-items: center;
-  justify-content: center;        
+  justify-content: center;
 }
 
 .search {
   position: relative;
   height: 51px;
   border-radius: 40px;
-  background: #fff4e8;
-  border: 0.5px solid #878787;
+  background: color-mix(in oklab, var(--accent) 8%, var(--surface)); 
+  border: 1px solid var(--border);                                    
   display: flex;
   align-items: center;
-  padding-left: 44px;   
+  padding-left: 44px;
   padding-right: 16px;
+}
+.search:focus-within{
+  outline: 2px solid color-mix(in oklab, var(--accent) 40%, transparent);
+  outline-offset: 2px;
 }
 
 .searchIcon {
@@ -56,7 +65,7 @@
   left: 16px;
   width: 20px;
   height: 20px;
-  color: #878787;
+  color: var(--muted);
 }
 
 .input {
@@ -66,7 +75,10 @@
   border: 0;
   outline: none;
   font-size: 18px;
+  color: var(--text);
 }
+.input::placeholder { color: var(--placeholder); }
+
 .filter {
   display: flex;
   align-items: center;
@@ -74,32 +86,49 @@
 }
 
 .filterBtn {
-  display: inline-flex;           /* ← тримає текст і стрілку в один ряд */
+  display: inline-flex;
   align-items: center;
-  gap: 8px;                       /* відступ між текстом і стрілкою */
+  gap: 8px;
   height: 56px;
   padding: 0 14px;
   border-radius: 12px;
- 
+
   font-size: 16px;
-  line-height: 1;                 /* щоб іконка не “падала” */
-  white-space: nowrap;            /* не переносити текст */
+  line-height: 1;
+  white-space: nowrap;
   cursor: pointer;
+
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  transition: background-color .15s ease, transform .1s ease;
 }
+.filterBtn:hover { background: var(--surface2); }
+.filterBtn:active { transform: translateY(1px); }
 
 .chev {
   width: 16px;
   height: 16px;
   flex-shrink: 0;
-  /* іноді корисно трішки опустити/підняти, якщо здається візуально криво: */
-  /* transform: translateY(1px); */
+  color: var(--muted);
 }
+
 
 .select {
   height: 44px;
   padding: 0 14px;
   border-radius: 12px;
-  border: 1px solid #d8d8d8;
-  background: #fff;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
   font-size: 16px;
+}
+.select:focus {
+  outline: 2px solid color-mix(in oklab, var(--accent) 35%, transparent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px){
+  .controls { grid-template-columns: 1fr; }
+  .filter   { justify-content: stretch; }
 }

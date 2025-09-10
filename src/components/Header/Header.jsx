@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { RxCross2 } from "react-icons/rx";         
+import { RxCross2 } from "react-icons/rx";
 import css from "./Header.module.css";
 
 export default function Header({ overlay = false }) {
@@ -13,37 +13,32 @@ export default function Header({ overlay = false }) {
   const [open, setOpen] = useState(false);
   const wrapRef = useRef(null);
 
+  // закриваємо при навігації
   useEffect(() => setOpen(false), [pathname]);
+
+  // лишаємо тільки Escape (клац ззовні закриватимемо бекдропом)
   useEffect(() => {
     if (!open) return;
     const onKey = (e) => e.key === "Escape" && setOpen(false);
-    const onDown = (e) => {
-      if (wrapRef.current && !wrapRef.current.contains(e.target)) setOpen(false);
-    };
     document.addEventListener("keydown", onKey);
-    document.addEventListener("mousedown", onDown);
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.removeEventListener("mousedown", onDown);
-    };
+    return () => document.removeEventListener("keydown", onKey);
   }, [open]);
 
   const anchor = (id) => (isHome ? `#${id}` : `/#${id}`);
 
   return (
-    <header className={overlay ? css.overlay : ""}>
+    <header className={css.overlay}>
       <div className={`container ${css.div}`}>
         {isHome ? (
           <>
             <Link href="/gallery" className={css.button} role="button">Галерея</Link>
-         <Link href="/reviews" className={css.button} role="button">
-  Відгуки
-</Link>
-              <Link href="/about" className={css.button}  role="menuitem" onClick={() => setOpen(false)}>Про нас</Link>
- </>
+            <Link href="/reviews" className={css.button} role="button">Відгуки</Link>
+            <Link href="/about"   className={css.button} role="button">Про нас</Link>
+          </>
         ) : (
           <Link href="/" className={css.button}>На Головну</Link>
         )}
+
         <div className={css.menuWrap} ref={wrapRef}>
           <button
             type="button"
@@ -55,25 +50,32 @@ export default function Header({ overlay = false }) {
           >
             {open ? <RxCross2 className={css.svg}/> : <GiHamburgerMenu className={css.svg}/>}
           </button>
-<nav
-  id="header-menu"
-  className={`${css.menu} ${open ? css.open : ""}`}
-  role="menu"
->
-  <Link href="/gallery"     role="menuitem" onClick={() => setOpen(false)}>Галерея</Link>
-  <Link href="/faq"         role="menuitem" onClick={() => setOpen(false)}>Часті Питання</Link>
- <Link href="/#events" onClick={() => setOpen(false)}>Останні події</Link>
 
-  <Link href="/how-to-help" role="menuitem" onClick={() => setOpen(false)}>Волонтерство</Link>
-  <Link href={anchor("contacts")}   role="menuitem" onClick={() => setOpen(false)}>Контакти</Link>
-   <Link href="/reviews" role="menuitem" onClick={() => setOpen(false)}>
-  Відгуки
-</Link>
-  <Link href="/about" role="menuitem" onClick={() => setOpen(false)}>Про нас</Link>
+          {/* бекдроп під меню — клік по ньому закриває */}
+          {open && (
+            <button
+              type="button"
+              className={css.backdrop}
+              aria-hidden="true"
+              onClick={() => setOpen(false)}
+            />
+          )}
 
-
-</nav>
-
+          <nav
+            id="header-menu"
+            className={`${css.menu} ${open ? css.open : ""}`}
+            role="menu"
+            // важливо: не даємо mousedown «піти» в документ
+            onMouseDown={(e) => e.stopPropagation()}
+          >
+            <Link href="/gallery" role="menuitem" onClick={() => setOpen(false)}>Галерея</Link>
+            <Link href="/faq"     role="menuitem" onClick={() => setOpen(false)}>Часті Питання</Link>
+            <Link href={anchor("events")}   role="menuitem" onClick={() => setOpen(false)}>Останні події</Link>
+            <Link href="/how-to-help"       role="menuitem" onClick={() => setOpen(false)}>Волонтерство</Link>
+            <Link href={anchor("contacts")} role="menuitem" onClick={() => setOpen(false)}>Контакти</Link>
+            <Link href="/reviews" role="menuitem" onClick={() => setOpen(false)}>Відгуки</Link>
+            <Link href="/about"   role="menuitem" onClick={() => setOpen(false)}>Про нас</Link>
+          </nav>
         </div>
       </div>
     </header>

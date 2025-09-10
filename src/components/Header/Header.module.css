@@ -1,6 +1,7 @@
-/* твоє існуюче */
+
 .overlay{
-  position: fixed;
+   position: relative;
+
   top: 24px;
   left: 0;
   right: 0;

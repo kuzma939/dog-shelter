@@ -303,14 +303,16 @@ export default function Reviews() {
             return (
               <div key={r.id} className="w-full flex items-end gap-8 relative">
                 {r.sessionId === sessionId && (
-                  <button
-                    onClick={() => deleteReview(r.id)}
-                    aria-label="Видалити"
-                    title="Видалити"
-                    className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-white shadow border text-gray-700"
-                  >
-                    ×
-                  </button>
+                 <button
+  onClick={() => deleteReview(r.id)}
+  aria-label="Видалити"
+  title="Видалити"
+  className="absolute -top-3 -right-3 w-8 h-8 rounded-full
+             bg-surface shadow border border-border text-text"
+>
+  ×
+</button>
+
                 )}
 
                 {r.imgDataUrl && (
@@ -385,13 +387,14 @@ export default function Reviews() {
         </button>
       </div>
 
-  
-      <button
-        onClick={() => setOpen(true)}
-        className="block font-bold text-3xl my-10 mx-auto bg-[#99621e] text-white rounded-[40px] w-[522px] h-[143px]"
-      >
-        Залишити коментар
-      </button>
+  <button
+  onClick={() => setOpen(true)}
+  className="block font-bold text-3xl my-10 mx-auto
+             bg-accent text-accentFg rounded-[40px]
+             w-[522px] h-[143px] hover:opacity-95 transition"
+>
+  Залишити коментар
+</button>
 {open && (
   <div
     className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50"
@@ -403,30 +406,29 @@ export default function Reviews() {
       onSubmit={submitReview}
       className="
         w-full max-w-[560px]
-        bg-white rounded-[20px]
-        shadow-[0_8px_30px_rgba(0,0,0,0.12)]
-        border border-[#E6E6E6]
-        px-6 py-5
+        bg-surface text-text
+        rounded-[20px] border border-border
+        shadow-card px-6 py-5
       "
     >
       {/* Заголовок */}
-      <h3 className="text-[20px] leading-[1.2] font-medium text-[#2A2A2A] mb-4 text-center">
+      <h3 className="text-[20px] leading-[1.2] font-medium mb-4 text-center">
         Залиште свій відгук
       </h3>
 
       {/* Лейбл до фото */}
-      <label className="block mb-2 text-[14px] leading-[1.2] text-[#6F6F6F]">
+      <label className="block mb-2 text-[14px] leading-[1.2] text-muted">
         Додайте фото (необов’язково)
       </label>
 
-      {/* Зона завантаження (плейсхолдер з пунктиром) */}
+      {/* Зона завантаження */}
       <div className="relative mb-4">
         <div
           className="
             h-[170px] w-full
             rounded-[16px]
-            bg-[#F3F3F3]
-            border border-dashed border-[#CFCFCF]
+            bg-surface2
+            border border-dashed border-surface3
             flex items-center justify-center
           "
         >
@@ -435,21 +437,18 @@ export default function Reviews() {
               <div
                 className="
                   w-10 h-10 rounded-full
-                  border border-[#BDBDBD]
+                  border border-muted
                   flex items-center justify-center
-                  text-[#8B8B8B] text-2xl
+                  text-muted text-2xl
                 "
               >
                 +
               </div>
-              <span className="text-[12px] text-[#8B8B8B]">
-                JPG / PNG / WebP
-              </span>
+              <span className="text-[12px] text-muted">JPG / PNG / WebP</span>
             </div>
           )}
 
           {imgPreview && (
-            // використовую NextImage, як і в тебе
             <NextImage
               src={imgPreview}
               alt="Превʼю"
@@ -461,7 +460,7 @@ export default function Reviews() {
           )}
         </div>
 
-        {/* Ховаємо input, але робимо клікабельною всю зону */}
+        {/* Клікабельний інпут поверх зони */}
         <input
           type="file"
           accept=".jpg,.jpeg,.png,.webp"
@@ -473,11 +472,11 @@ export default function Reviews() {
       </div>
 
       {fileError && (
-        <p className="text-[#D92D20] text-[12px] mb-4">{fileError}</p>
+        <p className="text-danger text-[12px] mb-4">{fileError}</p>
       )}
 
       {/* Лейбл до textarea */}
-      <label className="block mb-2 text-[14px] leading-[1.2] text-[#6F6F6F]">
+      <label className="block mb-2 text-[14px] leading-[1.2] text-muted">
         Ваш відгук
       </label>
 
@@ -490,11 +489,11 @@ export default function Reviews() {
         className="
           w-full
           rounded-[20px]
-          border-2 border-[#CFCFCF]
-          focus:border-[#B8B8B8] focus:outline-none
+          border-2 border-surface3 focus:border-border focus:outline-none
           px-4 py-3
-          text-[14px] text-[#2A2A2A]
-          placeholder:text-[#B3B3B3]
+          text-[14px] text-text
+          placeholder:text-placeholder
+          bg-surface
           mb-5
         "
       />
@@ -510,10 +509,9 @@ export default function Reviews() {
           className="
             h-[44px] px-5
             rounded-[20px]
-            border border-[#000000]
-            text-[14px] font-medium text-[#2A2A2A]
-            bg-white
-            hover:bg-[#F7F7F7] transition
+            border border-border
+            text-[14px] font-medium text-text
+            bg-surface hover:bg-surface2 transition
           "
         >
           Скасувати
@@ -525,8 +523,8 @@ export default function Reviews() {
             h-[44px] px-6
             rounded-[20px]
             text-[14px] font-semibold
-            bg-[#99621e] text-white
-            shadow-[0_2px_0_rgba(0,0,0,0.25)] 
+            bg-accent text-accentFg
+            shadow-[0_2px_0_rgba(0,0,0,0.25)]
             hover:opacity-95 active:translate-y-[1px] transition
           "
         >
@@ -536,6 +534,7 @@ export default function Reviews() {
     </form>
   </div>
 )}
+
 
     </div>
   );

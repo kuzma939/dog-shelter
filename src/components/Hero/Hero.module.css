@@ -1,9 +1,12 @@
 .hero {
-  --brand: #99621e;
-  --brand-600: #845518;
+  
   height: 845px;              
   color: #fff;
   overflow: hidden;
+  
+  background: transparent;     
+  overflow: hidden;
+
 }
 
 .bg {
@@ -20,11 +23,12 @@
       
     ),
     url("/image/hiro.avif") center/cover no-repeat; 
-  z-index: -1;
+  z-index: 0;
 }
 
 .inner {
-
+position: relative;
+z-index: 1;
   height: 100%;
 }
 .button {
