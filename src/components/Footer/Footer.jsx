@@ -4,7 +4,7 @@ import { FaPaw } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className={css.footer}>
+    <footer id="contacts" className={css.footer}>
       <div className="container">
         <div className={css.wrapper}>
           <div>
