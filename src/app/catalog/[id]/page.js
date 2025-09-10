@@ -32,10 +32,9 @@ export default function DogPage() {
 
   if (loading) return <p className="text-center">Loading dog...</p>;
   if (!dog) return <p className="text-center">Dog not found</p>;
-
-  return (
-    <div className="relative min-h-screen bg-[#fdf6ef] flex flex-col items-center py-16 px-20 max-w-[1440px] mx-auto">
-      <h1 className="text-5xl font-bold text-[#4b2e14] mb-12">{dog.name}</h1>
+return (
+    <div className="relative min-h-screen bg-[var(--background)] text-[var(--foreground)] flex flex-col items-center py-16 px-20 max-w-[1440px] mx-auto">
+      <h1 className="text-5xl font-bold text-[var(--foreground)] mb-12">{dog.name}</h1>
 
       <div className="flex flex-col lg:flex-row justify-center gap-10">
         {dog.photoUrl1 && (
@@ -72,14 +71,11 @@ export default function DogPage() {
 
           <div className="w-[416px] my-auto">
             {dog.gender == "male" ? (
-              <IoMdMale className="mx-auto mb-12 text-[#100800] w-8 h-12" />
+              <IoMdMale className="mx-auto mb-12 text-[var(--foreground)] w-8 h-12" />
             ) : (
-              <IoMdFemale className="mx-auto mb-12 text-[#100800] w-8 h-12" />
+              <IoMdFemale className="mx-auto mb-12 text-[var(--foreground)] w-8 h-12" />
             )}
-            <Progress
-              label="Емоційна стабільність"
-              value={dog.emotionalStability}
-            />
+            <Progress label="Емоційна стабільність" value={dog.emotionalStability} />
             <Progress label="Слухняність" value={dog.obedience} />
             <Progress label="Стан здоров'я" value={dog.healthCondition} />
             <Progress label="Соціалізованість" value={dog.socialization} />
@@ -87,13 +83,17 @@ export default function DogPage() {
         </div>
       </div>
 
-      <p className="text-xl font-medium text-[#4b2e14] leading-relaxed mt-12 w-full">
+      <p className="text-xl font-medium text-[var(--foreground)] leading-relaxed mt-12 w-full">
         {dog.description}
       </p>
- <Link href="/how-to-help"  aria-label="Залишити Заявку" className="rounded-full w-[320px] py-5 bg-[#99621e] text-white text-center font-semibold text-xl mt-10 shadow-lg hover:bg-[#7a4f18] transition">
-            <span> Залишити Заявку</span>
-          </Link>
-     
+
+      <Link
+        href="/how-to-help"
+        aria-label="Залишити Заявку"
+        className="rounded-full w-[320px] py-5 bg-[var(--accent)] text-white text-center font-semibold text-xl mt-10 shadow-lg hover:bg-[var(--accent)] transition"
+      >
+        <span>Залишити Заявку</span>
+      </Link>
     </div>
   );
 }
@@ -101,10 +101,10 @@ export default function DogPage() {
 function Progress({ label, value }) {
   return (
     <div>
-      <p className="text-2xl font-bold text-[#4b2e14] mb-1">{label}</p>
-      <div className="w-full bg-gray-200 rounded-full h-5 mb-10">
+      <p className="text-2xl font-bold text-[var(--foreground)] mb-1">{label}</p>
+      <div className="w-full bg-[var(--rail)] rounded-full h-5 mb-10">
         <div
-          className="bg-[#99621e] h-5 rounded-full transition-all duration-500"
+          className="bg-[var(--accent)] h-5 rounded-full transition-all duration-500"
           style={{ width: `${value * 10 || 0}%` }}
         />
       </div>
